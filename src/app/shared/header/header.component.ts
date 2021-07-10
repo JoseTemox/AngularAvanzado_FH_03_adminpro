@@ -1,16 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { UsuarioService } from '../../services/usuario.service';
+declare const gapi:any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styles: [
   ]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent  {
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService) { }
 
-  ngOnInit(): void {
+  logout(){
+    this.usuarioService.logout();
+
+    //para terminar de revocar las instancias de sesion
+    this.revokeAllScopes();
   }
 
+  revokeAllScopes() {
+    gapi.auth2.getAuthInstance().disconnect();
+  }
+
+ 
 }
