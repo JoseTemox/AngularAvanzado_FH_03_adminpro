@@ -12,6 +12,10 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
 
 
+//mantenimientos
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+
+
 const routes: Routes =[
 
     {
@@ -26,6 +30,14 @@ const routes: Routes =[
             { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas'} },
             { path: 'rxjs', component: RxjsComponent, data:{ titulo: 'Rxjs'} },
             { path: 'perfil', component: PerfilComponent, data:{ titulo: 'Perfil de Usuario'} },
+
+
+
+            //Mantenimientos
+            { path: 'usuarios', component: UsuariosComponent, data:{ titulo: 'Usuarios de la Aplicación'} },
+
+
+            
         ]
     }
 
