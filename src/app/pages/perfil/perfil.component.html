@@ -10,9 +10,9 @@
                         <label for="exampleInputuname">User Name</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-user"></i></div>
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="exampleInputuname" 
+                            <input type="text"
+                                   class="form-control"
+                                   id="exampleInputuname"
                                    placeholder="Nombre del Usuario"
                                    formControlName="nombre">
                         </div>
@@ -21,16 +21,16 @@
                         <label for="exampleInputEmail1">Email address</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-email"></i></div>
-                            <input type="email" 
-                                   class="form-control" 
-                                   id="exampleInputEmail1" 
+                            <input type="email"
+                                   class="form-control"
+                                   id="exampleInputEmail1"
                                    placeholder="Email"
                                    formControlName="email"
                                    [readOnly]="usuario.google">
                         </div>
                     </div>
-                   
-                    <button type="submit" 
+
+                    <button type="submit"
                             class="btn btn-success btn-block waves-effect waves-light m-r-10"
                             [disabled]="perfilForm.invalid">
                         <i class="fa fa-save"></i>
@@ -46,7 +46,7 @@
             <div class="card-body">
                 <h4 class="card-title">Avatar</h4>
                 <h6 class="card-subtitle">Imagen del Usuario</h6>
-                
+
 
                 <div class="text-center">
 
@@ -60,7 +60,7 @@
                 <br>
                 <br>
 
-                <button type="button" 
+                <button type="button"
                         class="btn btn-success btn-block waves-effect waves-light m-r-10"
                         [disabled]="!imagenSubir"
                         (click)="subirImagen()">

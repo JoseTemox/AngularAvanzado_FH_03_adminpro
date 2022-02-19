@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, map, catchError, delay } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
 
@@ -21,7 +21,7 @@ export class UsuarioService {
   public auth2: any;
   public usuario: Usuario;
 
-  constructor(private http: HttpClient, 
+  constructor(private http: HttpClient,
               private router: Router,
               private ngZone: NgZone) {
     this.googleInit();
@@ -68,11 +68,7 @@ export class UsuarioService {
       ...data,
       role: this.usuario.role
     }
-    return this.http.put(`${base_url}/usuarios/${ this.uid }`,data, {
-      headers: {
-        'x-token': this.token
-      }
-    });
+    return this.http.put(`${base_url}/usuarios/${ this.uid }`,data, this.headers);
   }
 
   crearUsuario( formData: RegisterForm){
@@ -119,7 +115,7 @@ export class UsuarioService {
 
   }
 
- 
+
 
   googleInit(){
 
@@ -144,18 +140,32 @@ export class UsuarioService {
 
     return this.http.get<CargarUsuario>(url, this.headers)
             .pipe(
+              // delay(5000),
               map(resp => {
                 const usuarios = resp.usuarios.map(
                   user => new Usuario(user.nombre,user.email, '',user.img,user.google, user.role,user.uid)
                 )
-
-
-
                 return {
                   total: resp.total,
                   usuarios
                 };
               })
             )
+  }
+
+  eliminarUsuario(usuario : Usuario){
+
+    const url = `${base_url}/usuarios/${ usuario.uid }`;
+
+    return this.http.delete(url, this.headers)
+  }
+
+  guardarUsuario(usuario: Usuario){
+
+    // data = {
+    //   ...data,
+    //   role: this.usuario.role
+    // }
+    return this.http.put(`${base_url}/usuarios/${ usuario.uid }`,usuario, this.headers);
   }
 }
