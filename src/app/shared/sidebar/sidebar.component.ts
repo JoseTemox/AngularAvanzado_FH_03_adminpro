@@ -16,15 +16,16 @@ export class SidebarComponent implements OnInit {
   // public imgUrl= ''
   public usuario: Usuario;
 
-  menuItems: any = []
+  // menuItems: any = []
 
-  constructor( private sidebarService: SidebarService, private usuarioService : UsuarioService) {
-    this.menuItems = this.sidebarService.menu;
+  constructor( public sidebarService: SidebarService,
+    private usuarioService : UsuarioService) {
+    // this.menuItems = this.sidebarService.menu;
     // this.imgUrl = usuarioService.usuario.imageUrl;
     this.usuario = usuarioService.usuario;
     console.log(this.usuario.imageUrl);
 
-    console.log(this.menuItems);
+    // console.log(this.menuItems);
    }
 
   ngOnInit(): void {

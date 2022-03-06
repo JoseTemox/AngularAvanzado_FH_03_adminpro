@@ -43,6 +43,19 @@ export class UsuarioService {
     }
   }
 
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE'{
+    return this.usuario.role
+
+  }
+
+  guardarToken( token: string, menu: any){
+
+    localStorage.setItem('token', token );
+    localStorage.setItem('menu', JSON.stringify(menu)  );
+
+
+  }
+
   validartoken(): Observable<boolean>{
 
     return this.http.get(`${ base_url }/login/renew`, {
@@ -55,7 +68,9 @@ export class UsuarioService {
         const { email, google, img='', nombre, role, uid } = resp.usuarioDB
 
         this.usuario = new Usuario(nombre,email,'',img,google,role,uid);
-        localStorage.setItem('token', resp.token );
+        this.guardarToken(resp.token, resp.menu);
+        // localStorage.setItem('token', resp.token );
+        // localStorage.setItem('menu', resp.menu );
         return true;
       }),
       catchError( error => of(false))
@@ -76,7 +91,10 @@ export class UsuarioService {
               .pipe(
                 tap( (resp: any) => {
 
-                  localStorage.setItem('token',resp.token)
+                  // localStorage.setItem('token',resp.token);
+                  // localStorage.setItem('menu', resp.menu );
+                  this.guardarToken(resp.token, resp.menu);
+
                   // console.log(resp);
                 })
              );
@@ -87,7 +105,10 @@ export class UsuarioService {
                .pipe(
                   tap( (resp: any) => {
 
-                    localStorage.setItem('token',resp.token)
+                    // localStorage.setItem('token',resp.token);
+                    // localStorage.setItem('menu', resp.menu );
+                    this.guardarToken(resp.token, resp.menu);
+
                     // console.log(resp);
                   })
                );
@@ -98,13 +119,17 @@ export class UsuarioService {
                .pipe(
                   tap( (resp: any) => {
 
-                    localStorage.setItem('token',resp.token)
+                    // localStorage.setItem('token',resp.token)
+                    // localStorage.setItem('menu', resp.menu );
+                    this.guardarToken(resp.token, resp.menu);
+
                     // console.log(resp);
                   })
                );
   }
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('menu');
     this.auth2.signOut().then(() => {
 
       this.ngZone.run(() => {

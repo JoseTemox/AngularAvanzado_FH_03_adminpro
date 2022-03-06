@@ -11,13 +11,13 @@ export class Usuario {
         public password?: string,
         public img?: string,
         public google?: boolean,
-        public role?: string,
+        public role?: 'ADMIN_ROLE' | 'USER_ROLE',
         public uid?: string,
     ){}
 
     get imageUrl(){
         //  upload/usuarios/77fcfbbc-15ba-4c47-8888-0cb91f498fe.png
-        
+
         if( !this.img){
             return `${ base_url }/upload/usuarios/no-image`;
 
@@ -31,5 +31,5 @@ export class Usuario {
 
     }
 
-    
+
 }
